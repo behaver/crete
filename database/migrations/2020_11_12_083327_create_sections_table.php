@@ -15,7 +15,15 @@ class CreateSectionsTable extends Migration
     {
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 100);
+            $table->unsignedSmallInteger('menu_id');
             $table->timestamps();
+
+            // define foreign references
+            $table->foreign('menu_id')->references('id')->on('menus')->constrained()->onDelete('cascade');
+
+            // create indexes
+            $table->index(['menu_id', 'name']);
         });
     }
 
@@ -26,6 +34,12 @@ class CreateSectionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sections');
+        Schema::dropIfExists('sections', function (Blueprint $table) {
+            // drop foreign references
+            $table->dropForeign(['menu_id']);
+
+            // drop indexes
+            $table->dropIndex(['menu_id', 'name']);
+        });
     }
 }

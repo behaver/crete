@@ -15,7 +15,15 @@ class CreateMediaTable extends Migration
     {
         Schema::create('media', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 100);
+            $table->set('type', ['text', 'picture', 'video', 'other']);
+            $table->foreignId('folder_id')->constrained('folders')->onDelete('cascade');
+            $table->foreignId('section_id')->constrained('sections')->onDelete('cascade');
             $table->timestamps();
+
+            // create indexes
+            $table->index(['folder_id']);
+            $table->index(['section_id', 'folder_id']);
         });
     }
 
@@ -26,6 +34,14 @@ class CreateMediaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('media');
+        Schema::dropIfExists('media', function (Blueprint $table) {
+            // drop foreign references
+            $table->dropForeign(['folder_id']);
+            $table->dropForeign(['section_id']);
+
+            // drop indexess
+            $table->dropIndex(['folder_id']);
+            $table->dropIndex(['section_id', 'folder_id']);
+        });
     }
 }

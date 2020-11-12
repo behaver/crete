@@ -14,8 +14,15 @@ class CreateMenusTable extends Migration
     public function up()
     {
         Schema::create('menus', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->smallIncrements('id');
+            $table->string('name', 100);
+            $table->unsignedSmallInteger('tab_id');
+
+            // define foreign references
+            $table->foreign('tab_id')->references('id')->on('tabs')->constrained()->onDelete('cascade');
+
+            // create indexes
+            $table->index(['tab_id', 'name']);
         });
     }
 
@@ -26,6 +33,12 @@ class CreateMenusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menus');
+        Schema::dropIfExists('menus', function (Blueprint $table) {
+            // drop foreign references
+            $table->dropForeign(['tab_id']);
+
+            // drop indexes
+            $table->dropIndex(['tab_id', 'name']);
+        });
     }
 }

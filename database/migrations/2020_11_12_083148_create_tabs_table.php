@@ -14,8 +14,11 @@ class CreateTabsTable extends Migration
     public function up()
     {
         Schema::create('tabs', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->smallIncrements('id');
+            $table->string('name', 100);
+
+            // create indexes
+            $table->unique('name');
         });
     }
 
@@ -26,6 +29,9 @@ class CreateTabsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tabs');
+        Schema::dropIfExists('tabs', function (Blueprint $table) {
+            // drop indexes
+            $table->dropUnique('tabs_name_unique');
+        });
     }
 }
