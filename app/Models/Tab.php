@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Tab extends Model
 {
     use HasFactory;
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
+     * Get the menus for the tab.
+     */
+    public function menus()
+    {
+        return $this->hasMany('App\Models\Menu');
+    }
 }
