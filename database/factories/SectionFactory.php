@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Section;
+use App\Models\Menu;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SectionFactory extends Factory
@@ -22,7 +23,8 @@ class SectionFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->unique()->word,
+            'menu_id' => Menu::factory(),
         ];
     }
 }

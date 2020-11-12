@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Menu;
+use App\Models\Tab;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class MenuFactory extends Factory
@@ -22,7 +23,8 @@ class MenuFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->unique()->word,
+            'tab_id' => Tab::factory(),
         ];
     }
 }

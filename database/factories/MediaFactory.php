@@ -22,7 +22,10 @@ class MediaFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->unique()->word,
+            'type' => $this->faker->randomElement($array = array ('text','picture','video', 'other')),
+            'folder_id' => Folder::factory(),
+            'section_id' => Section::factory(),
         ];
     }
 }

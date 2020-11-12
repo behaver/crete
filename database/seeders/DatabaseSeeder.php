@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Database\Seeders\TabSeeder;
+use Database\Seeders\MenuSeeder;
+use Database\Seeders\SectionSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +16,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call([
+            TabSeeder::class,
+            MenuSeeder::class,
+            SectionSeeder::class,
+        ]);
     }
 }

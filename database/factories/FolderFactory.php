@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Folder;
+use App\Models\Section;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class FolderFactory extends Factory
@@ -22,7 +23,9 @@ class FolderFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->unique()->word,
+            'folder_id' => Folder::factory(),
+            'section_id' => Section::factory(),
         ];
     }
 }
