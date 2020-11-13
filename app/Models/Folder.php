@@ -10,6 +10,15 @@ class Folder extends Model
     use HasFactory;
 
     /**
+     * The model's default values for attributes.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'parent_id' => 0,
+    ];
+
+    /**
      * Get the section that owns the folder.
      */
     public function section()

@@ -10,6 +10,15 @@ class Media extends Model
     use HasFactory;
 
     /**
+     * The model's default values for attributes.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'folder_id' => 0,
+    ];
+
+    /**
      * Get the section that owns the media.
      */
     public function section()

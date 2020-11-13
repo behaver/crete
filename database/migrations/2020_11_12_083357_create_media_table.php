@@ -17,7 +17,7 @@ class CreateMediaTable extends Migration
             $table->id();
             $table->string('name', 100);
             $table->set('type', ['text', 'picture', 'video', 'other']);
-            $table->foreignId('folder_id')->constrained('folders')->onDelete('cascade');
+            $table->foreignId('folder_id');
             $table->foreignId('section_id')->constrained('sections')->onDelete('cascade');
             $table->timestamps();
 
