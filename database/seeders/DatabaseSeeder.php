@@ -3,11 +3,10 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Database\Seeders\TabSeeder;
-use Database\Seeders\MenuSeeder;
+use Database\Seeders\CategorySeeder;
+use Database\Seeders\SubcategorySeeder;
 use Database\Seeders\SectionSeeder;
-use Database\Seeders\FolderSeeder;
-use Database\Seeders\MediaSeeder;
+use Database\Seeders\SubjectSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,11 +18,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            TabSeeder::class,
-            MenuSeeder::class,
+            CategorySeeder::class,
+            SubcategorySeeder::class,
             SectionSeeder::class,
-            FolderSeeder::class,
-            MediaSeeder::class,
+            SubjectSeeder::class,
         ]);
     }
 }

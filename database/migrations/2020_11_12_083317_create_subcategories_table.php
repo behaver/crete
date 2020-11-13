@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMenusTable extends Migration
+class CreateSubcategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateMenusTable extends Migration
      */
     public function up()
     {
-        Schema::create('menus', function (Blueprint $table) {
+        Schema::create('subcategories', function (Blueprint $table) {
             $table->smallIncrements('id');
             $table->string('name', 100);
-            $table->unsignedSmallInteger('tab_id');
+            $table->unsignedSmallInteger('category_id');
 
             // define foreign references
-            $table->foreign('tab_id')->references('id')->on('tabs')->constrained()->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->constrained()->onDelete('cascade');
 
             // create indexes
-            $table->index(['tab_id', 'name']);
+            $table->index(['category_id', 'name']);
         });
     }
 
@@ -33,12 +33,12 @@ class CreateMenusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menus', function (Blueprint $table) {
+        Schema::dropIfExists('subcategories', function (Blueprint $table) {
             // drop foreign references
-            $table->dropForeign(['tab_id']);
+            $table->dropForeign(['category_id']);
 
             // drop indexes
-            $table->dropIndex(['tab_id', 'name']);
+            $table->dropIndex(['category_id', 'name']);
         });
     }
 }

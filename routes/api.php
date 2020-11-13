@@ -2,12 +2,14 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Resources\Tab as TabResource;
-use App\Http\Resources\Menu as MenuResource;
+use App\Http\Resources\Category as CategoryResource;
+use App\Http\Resources\Subcategory as SubcategoryResource;
 use App\Http\Resources\Section as SectionResource;
-use App\Models\Tab;
-use App\Models\Menu;
+use App\Http\Resources\Subject as SubjectResource;
+use App\Models\Category;
+use App\Models\Subcategory;
 use App\Models\Section;
+use App\Models\Subject;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,22 +26,31 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// request all tabs data
-Route::get('/tabs', function () {
-    return TabResource::collection(Tab::all());
+// request all categories data
+Route::get('/categories', function () {
+    return CategoryResource::collection(Category::all());
 });
 
-// request all menus data which belong to the assigned tab 
-Route::get('/menus', function (Request $request) {
-    return MenuResource::collection(Menu::all()->where('tab_id', $request->tab_id));
+// request all subcategories data which belong to the assigned category 
+Route::get('/subcategories', function (Request $request) {
+    return SubcategoryResource::collection(Subcategory::all()->where('category_id', $request->category_id));
 });
 
-// request all sections data which belong to the assigned menu 
+// request all sections data which belong to the assigned subcategory 
 Route::get('/sections', function (Request $request) {
-    return SectionResource::collection(Section::all()->where('menu_id', $request->menu_id));
+    return SectionResource::collection(Section::all()->where('subcategory_id', $request->subcategory_id));
 });
 
-// request all sections data which belong to the assigned menu 
-Route::get('/cells', function (Request $request) {
-    return CellResource::collection(Cell::all()->where('folder_id', $request->folder_id)->simplePaginate(15));
+// request all subjects data which belong to the assigned subcategory 
+Route::get('/subjects', function (Request $request) {
+    $limit = 5;
+    $offset = max(((int)$request->page - 1) * $limit, 0);
+
+    return SubjectResource::collection(
+        Subject::all()
+            ->where('section_id', $request->section_id)
+            ->where('scope_id', $request->scope_id)
+            ->skip($offset)
+            ->take($limit)
+    );
 });

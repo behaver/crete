@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 
-class TabSeeder extends Seeder
+class CategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class TabSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('tabs')->insert([
+        DB::table('categories')->insert([
             [ 'name' => 'Gallery' ],
             [ 'name' => 'Criticism' ],
             [ 'name' => 'Typer' ],

@@ -15,10 +15,10 @@ class SectionSeeder extends Seeder
     public function run()
     {
         for ($i = 1; $i <= 8; $i++) { 
-            Section::create([ 'name' => 'Spring', 'menu_id' => $i ])->save();
-            Section::create([ 'name' => 'Summer', 'menu_id' => $i ])->save();
-            Section::create([ 'name' => 'Autumn', 'menu_id' => $i ])->save();
-            Section::create([ 'name' => 'Winter', 'menu_id' => $i ])->save();
+            Section::create([ 'name' => 'Spring', 'subcategory_id' => $i ])->save();
+            Section::create([ 'name' => 'Summer', 'subcategory_id' => $i ])->save();
+            Section::create([ 'name' => 'Autumn', 'subcategory_id' => $i ])->save();
+            Section::create([ 'name' => 'Winter', 'subcategory_id' => $i ])->save();
         }
     }
 }

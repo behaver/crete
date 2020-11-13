@@ -10,28 +10,18 @@ class Section extends Model
     use HasFactory;
 
     /**
-     * Get the menu that owns the section.
+     * Get the subcategory that owns the section.
      */
-    public function menu()
+    public function subcategory()
     {
-        return $this->belongsTo('App\Models\Menu');
+        return $this->belongsTo('App\Models\Subcategory');
     }
 
     /**
-     * Get the folders for the section.
+     * Get subjects which belong to the section.
      */
-    public function folders()
+    public function subjects()
     {
-        return $this->hasMany('App\Models\Folder');
+        return $this->hasMany('App\Models\Subject');
     }
-
-    /**
-     * Get the medias for the section.
-     */
-    public function medias()
-    {
-        return $this->hasMany('App\Models\Media');
-    }
-
-    
 }

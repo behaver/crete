@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTabsTable extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTabsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tabs', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->smallIncrements('id');
             $table->string('name', 100);
 
@@ -29,9 +29,9 @@ class CreateTabsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tabs', function (Blueprint $table) {
+        Schema::dropIfExists('categories', function (Blueprint $table) {
             // drop indexes
-            $table->dropUnique('tabs_name_unique');
+            $table->dropUnique('categories_name_unique');
         });
     }
 }

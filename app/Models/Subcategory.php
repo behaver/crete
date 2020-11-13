@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Menu extends Model
+class Subcategory extends Model
 {
     use HasFactory;
 
@@ -17,15 +17,15 @@ class Menu extends Model
     public $timestamps = false;
 
     /**
-     * Get the tab that owns the menu.
+     * Get the category that owns the subcategory.
      */
-    public function tab()
+    public function category()
     {
-        return $this->belongsTo('App\Models\Tab');
+        return $this->belongsTo('App\Models\Category');
     }
 
     /**
-     * Get the sections for the menu.
+     * Get the sections for the subcategory.
      */
     public function sections()
     {
